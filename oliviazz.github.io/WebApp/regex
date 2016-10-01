@@ -1,0 +1,11 @@
+//REGULAR EXPRESSIONS 
+
+pattern: /--------/modifying letters 
+subject is what we are operating on 
+
+pattern: / a /       
+    | = "or", so / a|b / = match an a or a b 
+subject: "Mary had a little lamb" //find all letter As, position doesn't matter
+
+
+

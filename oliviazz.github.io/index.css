@@ -1,0 +1,23 @@
+body {
+    background-color: lightcoral;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    text-align: center;
+    background-size: 100%;
+    font-size: 23px;
+    color:white;
+    display: relative;
+    text-shadow: 2px 2px #000000;
+    background-image: url('restaurant_ambiance.jpg');
+
+}
+
+h1 {
+    margin-left: 20px;
+    text-align: center;
+    color:whitesmoke;
+}
+td{
+    text-align: center;
+    
+}
+

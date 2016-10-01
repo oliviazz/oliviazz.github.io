@@ -1,0 +1,84 @@
+<html>
+<head>
+<title>My Page </title>
+<head>
+
+<body>
+<h6 align = "right"> Olivia Zhang <br> Web App Pd. 7 <br> Hi Mom!</h6>
+
+    <img align = "center" src = "http://wingsprogram.com/wp-content/uploads/2015/06/Summer-Is-On-Its-Way.jpg" >
+    <h1 align = "center" id = "bigTitle">What I did during break: </h1>
+<h2>What I did not do during break:</h2>
+    <ul>
+    <li>Go skiing </li>
+    <li>Visit the Taj Mahal</li>
+    <li>Explore Ancient Ruins</li>
+    </ul>
+<h2>What I did do during break:</h2>
+    <ol>
+    <li> Internship at the NIH</li>
+        <p> I studied bioinformatics at an internship in the National Cancer Institute and built a "Shiny" application using R.</p>
+    <li> Vacation Yellowstone National Park</li>
+        <p>With my family, I also visited Mt. Rushmore, Arches National Park, and other landmarks in the southwest US.</p>
+        <li>Went to a Taylor Swift Concert</li>
+        <p>1989 Album at the Washington National's Park </p>
+    </ol>
+    <h2> A Table:</h1>
+    <table>
+        <tr><td> Red</td> <td> Blue</td> <td> Green</td></tr>
+        <tr><td>Marshmallow</td><td>Chocolate</td><td>Strawberry</td></tr>
+        <tr><td>Denim</td><td>Leather</td><td>Linen</td></tr>
+    </table>
+    <hr><br>
+    <div>
+    <a href = "http://google.com">Google</a>
+    </div>
+    <div>
+    <a href = "http://yahoo.com">Yahoo</a>
+    </div>
+    <div>
+    <a href = "http://facebook.com">Facebook</a>
+    </div>
+    <hr>
+    <span>
+    <a href = "http://bing.com">Bing</a>
+    <a href = "http://twitter.com">Twitter</a>
+    <a href = "http://instagram.com">Instagram</a>
+    <a href = "http://dictionary.com">Dictionary.com</a>
+        <input type = "text" id = "textInput" onKeyPress = "showName()">Enter Name Here: </input>
+    </span>
+</body>
+    <script>
+    
+        
+        function showName(){
+            var elemText = document.getElementById('textInput').value;
+            if(elemText.length > 6){
+                alert('Title Changed');
+            document.getElementById('bigTitle').innerHTML = elemText;
+            }
+            
+        }
+        
+        
+        
+        
+        
+    </script>
+    <style type="text/css">
+        body {background: lavender;
+            color:darkblue;
+			
+		}
+        p{color:darkmagenta;
+          font-style: italic;
+          font-family:cursive;
+        }
+        img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+}
+		</style>
+</html>
+    

@@ -1,0 +1,252 @@
+<html>
+<head>
+    <br><br>
+   <title>Quote It Game</title>
+     <link rel="stylesheet" type="text/css" href="quotesGameStyle.css">
+</head>    
+<body>
+    <br>
+    <h1>Quote It</h1>
+    <br>
+    <table bordercolor = "#FFFFFF" width = "80%" align = "center">
+    <tr><td id = "philosopher">Philosophers</td>
+        <td id = "world">Leaders and Philanthropists</td>
+        <td id = "perform">Athletes + Performers</td>
+        <td id = "science">Scientists + Scholars</td>
+        <td id = "author">Authors</td>
+        <td id = "prez">US Presidents</td>
+       
+        </tr>
+    </table>
+    <br>
+    <div id = "quote" align = "center" bordercolor = "#FFFFFF"  width = "75%">
+        <h4>Can you identify each quote's author? <br>Press enter to submit, or ask for a hint to help.</h4>
+        <button id = "start" onClick = "startGame()" accesskey="s"><u>S</u>tart</button>
+    </div>
+   <br><br><br>
+    <input type = "text" id = "entered" ><button onClick = "checkAnswer()" accessKey = "e" id = "enterButton"> <u>E</u>nter</button>
+    <button id  = "hintButton" onClick = "showHint()" accesskey = "h"><u>H</u>int?</button>
+    <div id = "hintDiv"></div>
+    <br><br>
+    <div id = "score">0/0</div>
+    <br>
+    <button id = "refreshButton" onClick = "location.reload()" accesskey="r"><u>R</u>estart Game</button>
+    
+<script>
+    var numQuest = 0;
+    var numRight = 0;
+    var numTries = 0;
+    //var hintNum = 0;
+    var missedQuotes = {};
+    document.getElementById('entered').disabled = true;
+    //schema:  "Quote":["Formal Author", "category", "Other accepted answers"]
+    var quotes = {"Liberty, when it begins to take root, is a plant of rapid growth.":["George Washington", "prez", "washington"],
+                 "No one can make you feel inferior without your consent.":["Eleanor Roosevelt", "world"],
+                  "Wise men speak because they have something to say; Fools because they have to say something.":["Plato", "philosopher"],
+                 "I cannot tell a lie.":["George Washington", "prez", "Washington"],
+                 "Anyone who has never made a mistake has never tried anything new.":["Albert Einstein", "science", "Einstein"],
+                  "Happiness depends upon ourselves.":["Aristotle", "philosopher"],
+                  "Make America great again!":["Donald Trump", "perform", "joke", "Trump"],
+                  "You have to have the fighting spirit. You have to force moves and take chances.":["Bobby Fischer", "perform", "Fischer"],
+                  "Love is the answer, and you know that for sure; Love is a flower, you've got to let it grow.":["John Lennon", "perform", "Lennon"],
+                  "So we beat on, boats against the current, borne back ceaselessly into the past.":["F. Scott Fitzgerald", "author", "Fitzgerald", "Nick Carraway"],
+                  "In matters of style, swim with the current; in matters of principle, stand like a rock.":["Thomas Jefferson", "prez", "TJ", "Jefferson"],
+                  "Education is the most powerful weapon which you can use to change the world.":["Nelson Mandela", "world","Mandela"],
+                  "The fear of death follows from the fear of life. A man who loves fully is prepared to die at any time.":["Mark Twain", "author", "Twain"],
+                  "In three words I can sum up everything I've learned about life: it goes on.": ["Robert Frost", "author", "Frost"],
+                  
+                   "I walk slowly, but I never walk backward.":["Abraham Lincoln", "prez", "Lincoln", "Abe Lincoln"],
+                  "If you're going through hell, keep going.":["Winston Churchill", "world", "Churchill"],
+                  "We are such stuff as dreams are made on, and our little life, is rounded with a sleep.": ["William Shakespeare", "author", "Shakespeare"],
+                  "It does not do to dwell on dreams and forget to live.": ["JK Rowling", "author", "J.K. Rowling", "Rowling", "Dumbledore"],
+                  "The future belongs to those who believe in the beauty of their dreams.":["Eleanor Roosevelt", "world"],
+                  "Do not go where the path may lead , go instead where there is no path and leave a trail":["Ralph Waldo Emerson", "author", "Emerson"],
+                  "The truth is, everyone is going to hurt you. You just got to find the ones worth suffering for.":["Bob Marley", "perform", "Marley"],
+                  "Real knowledge is to know the extent of one's ignorance.":["Confucius", "philosopher"],
+                  "Our greatest glory is not in never falling, but in rising every time we fall.":["Confucius", "philosopher"],
+                  "It is better to be feared than loved, if you cannot be both.":["Niccolo Machiavelli", "world", "Machiavelli"],
+                  
+                  "Nothing is impossible, the word itself says 'I'm possible'!":["Audrey Hepburn", "perform", "Hepburn"],
+                  "Be who you are and say what you feel, because those who mind don't matter and those who matter don't mind.":["Dr Seuss", "author", "Seuss", "Dr. Seuss"],
+                  "Believe you can and you're halfway there.":["Theodore Roosevelt", "prez", "Teddy Roosevelt", "Roosevelt"],
+                 "The best way to lose yourself is in the service of others.":["Mahatma Gandhi", "world","Gandhi"],
+                 "Mankind must put an end to war or war will put an end to mankind.": ["John F Kennedy", "prez", "JFK"]
+                 
+                }
+    document.addEventListener("keypress", function(event){
+        if(event.keyCode == 13){
+            checkAnswer();
+        }
+    });
+    
+    function startGame(){
+        document.getElementById('entered').disabled = false;
+        newQuest();
+    }
+   function newQuest(){
+       hintNum = 0;
+       if(numQuest > 9){
+           endGame();
+       }
+       else{
+       document.getElementById('entered').focus();
+       numQuest += 1;
+       numTries = 0;
+       if(Object.keys(quotes).length > 0){
+         var index = Math.floor((Math.random() * (Object.keys(quotes).length)));  
+       var randomquote = Object.keys(quotes)[index];
+       document.getElementById('quote').innerHTML = randomquote;
+       }
+       }
+    }
+   function checkAnswer(){
+       var quote = document.getElementById('quote').innerHTML;
+       var qInfo = (quotes[quote]);
+       var enteredText = document.getElementById('entered').value;
+       enteredText = enteredText.replace(/^\s+|\s+$/g,'');
+       
+       var match = false;
+       for(name in qInfo){
+           if (enteredText.toUpperCase() == (qInfo[name]).toUpperCase()
+               && enteredText.toUpperCase() !=  ("PREZ"||"SCIENCE"||"HISTORY"|| "WAR"||"PERFORM"|| "PHILOSOPHER")){ 
+               match = true;
+           }
+       }
+       if(match){
+           numRight +=1;
+           document.getElementById('entered').value = "";
+           delete quotes[""+quote];
+           newQuest();
+       }
+       else{
+           numTries += 1;
+           var numFlashes = 1;
+           var myVar= setInterval(function(){
+               if(numFlashes % 3 != 0 ){
+                   document.getElementById('entered').style.backgroundColor = "rgba(246, 109, 109, 0.8)";
+               }
+               else{
+                   document.getElementById('entered').style.backgroundColor = "#FFFFFF";
+               }
+               if(numFlashes > 5){
+                  clearInterval( myVar);
+               }
+               numFlashes += 1;
+               
+           }, 250);
+              
+           if(numTries > 2){
+               missedQuotes[quote] = qInfo[0];
+               delete quotes[""+quote];
+               document.getElementById('entered').value = ""; 
+               newQuest();
+           }
+       }
+      document.getElementById('score').innerHTML = numRight + '/' + numQuest;
+        
+       }
+       
+    function showHint(){
+        hintNum ++;
+        var text = document.getElementById('quote').innerHTML;
+        var quoteArray = (quotes[text]);
+        var hint = quoteArray[1];
+        var hintPd = quoteArray[2];
+        
+        //if(hintNum == 1){
+        var numflash = 0; 
+        var myVar= setInterval(
+            function(){
+                if(numflash %2 !== 0){
+                    document.getElementById(''+hint).style.color = "white";
+                }
+                else{
+                document.getElementById(''+hint).style.color = "lightgreen";
+                }
+                numflash += 1;
+                if(numflash > 7){
+                clearInterval(myVar);
+                }},
+        330);
+        document.getElementById('entered').focus();
+    //}
+//        else{
+//          var numflash = 0; 
+//          var myVar= setInterval(
+//            function(){
+//            if(numflash %2 !== 0){
+//                    document.getElementById(''+hintPd).style.color = "white";
+//                }
+//                else{
+//                document.getElementById(''+hintPd).style.color = "lightgreen";
+//                }
+//                numflash += 1;
+//                if(numflash > 7){
+//                clearInterval(myVar);
+//                }},
+//        330);
+//            
+//            
+//        }
+    }
+   
+    function endGame(){
+        document.getElementById('quote').innerHTML = 'GAME OVER!';
+        document.getElementById('entered').remove();
+        document.getElementById('enterButton').remove();
+        document.getElementById('hintButton').remove();
+        //Flash the restart button
+        endFlashes = 0;
+         var newVar= setInterval(function(){
+               if(endFlashes % 3 != 0 ){
+                   document.getElementById('refreshButton').style.borderColor = "lightgreen";
+                    document.getElementById('refreshButton').style.color = "lightgreen";
+               }
+               else{
+                   document.getElementById('refreshButton').style.borderColor = "white";
+                   document.getElementById('refreshButton').style.color = "white";
+               }
+               if(endFlashes > 8){
+                  clearInterval( newVar);
+               }
+               numFlashes += 1;
+               
+           }, 700);
+        
+        document.getElementById('refreshButton').style.borderColor = "lightgreen";
+        document.getElementById('refreshButton').style.color = "lightgreen";
+        var missedTable = document.createElement('table');
+        missedTable.setAttribute('id', 'resultTable');
+        for(item in missedQuotes){
+            var temprow = document.createElement('tr');
+            var mq = document.createElement('td');
+            mq.innerHTML = item;
+            var ma = document.createElement('td');
+            ma.innerHTML = missedQuotes[item+''];
+            temprow.appendChild(mq);
+            temprow.appendChild(ma);
+            missedTable.appendChild(temprow);
+        }   
+        
+        var missedText = document.createElement('p');
+        if(Object.keys(missedQuotes).length > 0){
+            document.getElementById('quote').innerHTML += "&nbsp; You Missed: ";
+        }
+        else{
+            missedText.innerHTML = "Congratulations! You got a perfect score!";
+            document.getElementById('quote').appendChild(missedText);
+        }
+        missedTable.style.align = "center";
+        missedTable.style.border = "1px solid white";
+        missedTable.style.marginLeft = "150px";
+        missedTable.style.width = "75%";
+        var abreak = document.createElement('br');
+        document.getElementById('quote').appendChild(abreak);
+        document.getElementById('quote').appendChild(missedTable);                   
+            
+    }
+                 
+    </script> 
+</body>
+</html>
+    

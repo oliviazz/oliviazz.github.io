@@ -1,0 +1,92 @@
+body {
+    font-family:Geneva, Tahoma, Verdana, sans-serif;
+    text-align: center;
+    background-size: 100%;
+    font-size: 23px;
+    color:white;
+    background-image: url('mountain.jpg');
+    /*background-image: url('http://wallpaperlepi.com/wp-content/uploads/2014/09/Sky-and-Mountain-Sunset-Wallpaper-Android.jpg');/*url('http://intelligenttravel.nationalgeographic.com/files/2015/08/kilimanjaro-above-clouds-sunset-590-590x392.jpg');*/
+
+}
+table{
+    width:80%;
+    align: center;
+    BORDERCOLOR: 'FFFFFF';
+     
+}
+#resultTable{
+    width:80%;
+    align: center;
+    BORDERCOLOR: 'FFFFFF';
+    border: 2px;
+     
+}
+button {
+  padding:5px;
+  border: 1px solid #FFFFFF;
+  color:#FFFFFF;
+  text-decoration:none;
+  background-color: Transparent;
+  height: 40px;
+  width: 70px;
+  margin-left: 10px;
+  font-size: 15px;
+  
+}
+#startButton{
+  padding:5px;
+  border: 1px solid #FFFFFF;
+  color:#FFFFFF;
+  text-decoration:none;
+  background-color: Transparent;
+  height: 40px;
+  margin-left: 10px;
+  font-size: 22px;
+   width: 115px; 
+}
+
+#refreshButton{
+  padding:5px;
+  border: 1px solid #FFFFFF;
+  color:#FFFFFF;
+  text-decoration:none;
+  background-color: Transparent;
+  height: 25px;
+  margin-left: 10px;
+  font-size: 10px;
+  position: fixed;
+  bottom:17px;
+    right:45px;
+  width: 100px; 
+}
+input[type=text] {
+ align-content: center;
+ padding: 10px;
+    width: 45%;
+    height:40px;
+  border: solid 2px #dcdcdc;
+  transition: box-shadow 0.3s, border 0.3s;
+}
+input[type="text"]:focus,
+input[type="text"].focus {
+  border: solid 1px #66b2ff;
+  box-shadow: 0 0 5px 1px #66b2ff;
+}
+#score{
+  position: fixed;
+  float:right;
+  text-align: right;
+  margin-right:35px;
+  font-size: 55px;
+  bottom: 45px;
+  right:8px;
+}
+
+#quote{
+    height: 125px;
+    align: center;
+    text-align: center;
+    
+}
+
+

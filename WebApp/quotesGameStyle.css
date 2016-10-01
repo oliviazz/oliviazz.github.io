@@ -2,7 +2,7 @@ body {
     font-family:Geneva, Tahoma, Verdana, sans-serif;
     text-align: center;
     background-size: 100%;
-    font-size: 23px;
+
     color:white;
     background-image: url('mountain.jpg');
     /*background-image: url('http://wallpaperlepi.com/wp-content/uploads/2014/09/Sky-and-Mountain-Sunset-Wallpaper-Android.jpg');/*url('http://intelligenttravel.nationalgeographic.com/files/2015/08/kilimanjaro-above-clouds-sunset-590-590x392.jpg');*/
@@ -89,4 +89,7 @@ input[type="text"].focus {
     
 }
 
+a{
+    color:white;
+}
 

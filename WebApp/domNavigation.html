@@ -1,0 +1,146 @@
+<html>
+<head>
+	<title>DOM Tree Navigation</title>
+	<style type="text/css">
+		div{
+			background-color: palegoldenrod;
+			border-radius: 8px;
+			border: 1px black solid;
+			margin:12px;
+			padding: 2px;
+		}
+		p{
+			background-color: coral;
+			border: 2px maroon dashed;
+			opacity: .4;
+		}
+		.location{
+			width: 40%;
+			background-color: cyan;
+		}
+		.animal{
+			background-color: lightpink;
+		}
+        body{
+            background-color: aliceblue;
+        }
+	</style>
+	<script>
+        var start = null;
+        var index = 2;
+       
+       
+        document.addEventListener("keydown", function(e){
+            if(start == document.getElementsByTagName("BODY")[0]){
+                document.getElementsByTagName("BODY")[0].style.backgroundColor = "red";
+                alert('Nowhere to Go! Click on another element!');
+                start = null;
+            }
+            else{
+                document.getElementsByTagName("BODY")[0].style.backgroundColor = "white";
+            }
+                
+            if(e.keyCode == 39){ //RIGHT
+               flashNext();
+            }
+            if(e.keyCode == 37){//LEFT
+               flashPrev();
+            }
+            if(e.keyCode == 38){// UP 
+               flashParent();
+            }
+            if(e.keyCode == 40){ //DOWN
+               flashChild();
+            }
+		});
+        
+        function chooseStart(ev){
+          if(start == null || start == document.getElementsByTagName("BODY")[0]|| start == document.getElementsByTagName("HTML")[0]  ){
+            start = ev.target;
+            start.style.borderColor = "red";
+            start.style.borderWidth = "thick";
+           }
+        }
+        function flashNext(){
+            if(start.nextElementSibling != null){
+                start = change(start, start.nextElementSibling);   
+            }
+        } 
+        function flashPrev(){
+            if(start.previousElementSibling != null){
+                start = change(start, start.previousElementSibling);  
+            }
+        } 
+           
+        function flashParent(){
+            if(start.parentElement == null){
+                alert('Nowhere to go!');
+               
+            }
+            else{
+                start = change(start, start.parentElement);  
+            }
+        } 
+           
+        function flashChild(){
+            if(start.childNodes[0] == null){
+                 alert('Nowhere to go!');
+               
+          } 
+            else{
+                start =  change(start, start.children[0]); 
+               
+            }
+        }
+            
+
+        function change(oldElem, newElem){
+            oldElem.style.borderColor = "";
+            oldElem.style.borderWidth = "";
+            newElem.style.borderColor = "red";
+            newElem.style.borderWidth = "thick";
+            return newElem;
+        }
+        
+	</script>
+</head>
+<body class="fadeIn" onClick = chooseStart(event) >
+	<div class="location">
+		Zoo
+		<div class="animal">
+			Giraffe
+			<div id = "start">Ga</div>
+			<div>Gb</div>
+			<div>Gc</div>
+			<div>Gd</div>
+			<div>Ge</div>
+		</div>
+	</div>
+    <div class = "location">Friends
+       <div class = "animal">
+        Zebra
+        <div class = "black">Black</div>
+        <div class = "white">White</div>
+           <div class = "black">Black</div>
+        </div>
+    </div>
+	<div class="location">
+		Wild
+		<div class="animal">
+			Lion
+			<div id="La">La</div>
+			<div>Lb</div>
+			<div>Lc</div>
+		</div>
+		<div class="animal">
+			Elephant
+			<div>Ea
+				<p>Eaa</p>
+                <p>Yo</p>
+			</div>
+			<p>Eb</p>
+			<p>Ec</p>
+		</div>
+	</div>
+</body>
+</html>

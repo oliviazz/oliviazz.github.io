@@ -1,0 +1,54 @@
+<html>
+
+<head><title>CANVAS </title>
+    <link rel="stylesheet" type="text/css" href="50statesstyle.css">
+</head>
+<body>
+    <br>
+    <h1 id = "title">DRAW ON THE CANVAS!</h1>
+   <canvas id="myCanvas" width="800" height="400" style="border:10px solid white; color:white;">
+    </canvas>
+    <br>
+    <button align = "center" type = "button" accesskey="c"onClick = "clearCanvas()"><u>C</u>lear Canvas</button>
+</body>
+
+<script>
+    count = 0;
+    document.addEventListener("click", function(e){
+       count++;
+        if(count >= 15){
+            document.getElementById('title').innerHTML = "IT'S A CONFETTI PARTY!";
+        }
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+        var x;
+        var y;
+        if (e.pageX || e.pageY) { 
+            x = e.pageX;
+            y = e.pageY;
+        }
+        else { 
+            x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft; 
+            y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop; 
+        } 
+        x -= c.offsetLeft + 13;
+        y -=c.offsetTop + 13;
+        randInt = Math.floor((Math.random() * 8) + 1);
+        colors = ["red","red","blue","lightgreen","turquoise", "green","orange", "yellow","magenta","cyan", "FF6666", "gold"];
+        ctx.fillStyle= colors[randInt];
+        
+        ctx.beginPath();
+        ctx.arc(x,y,5,0,2*Math.PI);
+        ctx.fill();
+        //ctx.fillRect(x,y,8,8);
+        });
+    
+    function clearCanvas(){
+        location.reload();
+        document.getElementById('title').innerHTML = "DRAW ON THE CANVAS!";
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        document.getElementById('title').innerHTML = "DRAW ON THE CANVAS!";
+        ctx.clearRect(0,0,800,400);
+    }
+</script></html>

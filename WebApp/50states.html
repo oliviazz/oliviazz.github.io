@@ -1,0 +1,156 @@
+<html>
+
+    <head><title>50-States Game</title>
+    <link rel="stylesheet" type="text/css" href="50statesstyle.css">
+    </head>
+    <body>
+        <h1>Can you name the 20 US Cities with the highest GDPs<a href       ="https://en.wikipedia.org/wiki/List_of_U.S._metropolitan_areas_by_GDP">?</a></h1>
+        <h4 id = "turnGreen"><i>Try to complete the task in 5 minutes! Hit "Enter" to try a city</i> </h4>
+        <img width="100" height="200"src = "http://images.clipartpanda.com/no-money-sign-clip-art-money-sign.png">
+        <img src = "http://cdn.usasocialcondition.com/wp-content/uploads/2015/05/14.png" width="300" height="200" >
+        <img width="100" height="200" src = "http://images.clipartpanda.com/no-money-sign-clip-art-money-sign.png">
+        <br>
+    
+        <button type = button onClick = startTimer() accessKey = 't' id = "timerButton" > Start <u>T</u>imer</button>
+        <p id = "timer_div">5:00</p>
+        <input type = "text" id = "enteredStates" onKeyPress = "checkItem(event)" disabled = "true" ></input>
+        <div id = "messageBoard">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+        <p id = "listTyped"></p>
+        <br>
+        <p id = "missedBoard"></p>
+        <button id = "startOver" onClick = location.reload() accesskey="R"><u>R</u>estart Game</button>
+    </body>
+
+<script>
+var states =
+["HOUSTON", "LOS ANGELES", "NEW YORK", "WASHINGTON DC","DALLAS","SAN FRANCISCO","PHILADELPHIA","BOSTON","ATLANTA","SEATTLE", "MIAMI", "MINNEAPOLIS", "DETROIT", "PHOENIX", "CHICAGO", "SAN DIEGO", "SAN JOSE", "DENVER", "BALTIMORE", "PORTLAND"];  
+    
+var entered = [];
+var numStates = 0;
+var wonGame = false;
+    
+    function alertFunc(){
+        if(!wonGame && document.getElementById('missedBoard').innerHTML == ''){
+            alert('Time is up!... You have failed!');
+            var missedStates = '';
+            document.getElementById('missedBoard').innerHTML += 'You missed the cities: ';
+            for( i = 0; i < states.length; i++){
+                if(i%5 == 0){
+                    document.getElementById('missedBoard').innerHTML += '<br>';
+                }
+              document.getElementById('missedBoard').innerHTML +=( " " +states[i]);
+            }
+            document.getElementById('missedBoard').style.color = "red";
+            var parentTable = document.getElementById('parentTable');
+            parentTable.style.backgroundColor = 'red';
+            var messageBoard = document.getElementById('messageBoard');
+            messageBoard.innerHTML = 'You Have Failed :( ';
+            document.getElementById("timer_div").innerHTML= '0:00';
+            document.getElementById("timer_div").style.color = "red";
+            messageBoard.style.color = 'red';
+            messageBoard.style.size = '20px';
+            
+            clearInterval(counter); 
+            document.getElementById('timer_div').style.color = "red";
+            return;
+            }
+    }
+
+    function startTimer(){
+   
+       
+        document.getElementById("enteredStates").disabled = false;
+        document.getElementById("enteredStates").focus();
+        var timerButton = document.getElementById('timerButton');
+        timerButton.innerHTML = "GO";
+        timerButton.style.color = "green";
+        
+        var count=300;
+
+        var counter=setInterval(function(){  //1000 will  run it every 1 secon
+        if(!wonGame){
+            count = count-1;
+        }
+        if (count <= 0 )
+        {
+        clearInterval(counter); 
+        alertFunc();
+        document.getElementById('timer_div').style.color = "red";
+        return;
+           
+        }
+        var minutes = Math.floor(count/60);
+        var seconds = count - (60*minutes);
+        if(seconds < 10){
+            seconds = '0'+seconds;
+        }
+        document.getElementById("timer_div").innerHTML= minutes + ':' + seconds
+        document.getElementById("timer_div").style.color = 'yellow';
+        },1000);
+  
+    }
+function checkItem(e){
+        
+        if(e.keyCode === 13){
+            var messageBoard = document.getElementById('messageBoard');
+            var typedWord = document.getElementById('enteredStates').value;
+            typedWord = typedWord.replace(/^\s+|\s+$/g,'');
+            var match = false;
+            var matchedState = '';
+            for(x = 0; x < states.length; x++){
+                state = states[x];
+            
+                    if(state.toUpperCase() == typedWord.toUpperCase()){
+                    match = true;
+                    matchedState = state;
+                }
+            }
+            if(match){
+                numStates += 1;
+                entered.push(matchedState);
+                messageBoard.innerHTML = 'Nice! ' + numStates + '&nbsp; state(s) entered.';
+                messageBoard.style.color = 'green';
+                if(numStates % 5 == 0){
+                document.getElementById('listTyped').appendChild(document.createElement('br'));
+                }
+                var indexGood = states.indexOf(matchedState);
+                if (indexGood > -1) {
+                states.splice(indexGood, 1);
+                }
+                document.getElementById('listTyped').innerHTML += matchedState += '&nbsp;&nbsp;';
+                document.getElementById('listTyped').style.color = "darkblue";
+   
+            }   
+            else{
+                var typedWordUpper = typedWord.toUpperCase();
+                if(entered.indexOf(typedWordUpper)>-1){
+                    
+                    messageBoard.innerHTML = 'Sorry, ' + typedWord + ' was already entered';
+                    messageBoard.style.color = 'red';
+                }
+                else{
+            
+                messageBoard.innerHTML = 'Sorry, ' + typedWord + ' is not a top-20 GDP US city';
+                messageBoard.style.color = 'red';
+                }
+            }
+            
+            document.getElementById('enteredStates').value = '';
+            //alert(numStates);
+            if(numStates == 20 || states.length == 0)
+            { 
+              wonGame = true;
+              var myTime = document.getElementById('timer_div').innerHTML;
+              document.getElementById('messageBoard').innerHTML = 'Congratulations, you beat the game in ' + myTime + '!';
+                document.getElementById('messageBoard').style.color = "lightgreen";
+              document.getElementById('timer_div').style.color = "lightgreen";
+              clearTimeout(myVar);
+             document.getElementById("enteredStates").disabled = true;
+                
+                
+            }
+        }         
+
+}
+</script></html>

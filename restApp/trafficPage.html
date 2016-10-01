@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+ <head>
+     <title>Restaurant Traffic View</title>
+  <style type="text/css">
+      html, body { height: 100%; margin: 0; padding: 0; align-content: center }
+      #map { height: 80%;
+             width: 50%; }
+  </style>
+ </head>
+ <body>
+     <br><br>
+     <form>
+     Restaurant Latitude:<input type = "text" id = "lat_coord" value = "40.7127" onKeyPress = "reloadMap(event)">
+     Restaurant Longitude:<input type = "text" id = "long_coord" value = "-74.0059" onKeyPress = "reloadMap(event)">
+     <button type = "button" id = "traffBtn" onClick = "toggleTraffic()"> Hide Traffic</button>
+     </form>
+    <div id="map" align = "center"></div>
+    <script type="text/javascript">
+        var showTraffic = true;
+        var map;
+        var trafficLayer;
+        var lat_coord = parseFloat(document.getElementById('lat_coord').value);
+        var long_coord = parseFloat(document.getElementById('long_coord').value); 
+        
+        if(lat_coord == "" || long_coord == ""){
+            lat_coord = 24.3; //Change to Current Location 
+            long_coord = 29.3; //Change to Current Location 
+        }
+        $('#').on('input', function() {
+        // do something
+      });
+      function toggleTraffic(){
+          if(showTraffic){
+              showTraffic = false;
+              trafficLayer.setMap(null); 
+              document.getElementById('traffBtn').innerHTML = "Show Traffic";
+          }
+          else{
+              showTraffic = true;
+              trafficLayer.setMap(map); 
+          }
+      
+          document.getElementById('traffBtn').innerHTML = "Hide Traffic";
+      }
+
+      function reloadMap(e){
+
+        var newlat = parseFloat(document.getElementById('lat_coord').value);
+        var newlong = parseFloat(document.getElementById('long_coord').value); 
+        if(!(newlat != lat_coord || newlong != long_coord || newlat == NaN || newlong == NaN)){
+           lat_coord = parseFloat(document.getElementById('lat_coord').value);
+           long_coord = parseFloat(document.getElementById('long_coord').value);
+           initMap();
+
+        }
+
+      }
+      function initMap() {
+    
+          map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: lat_coord, lng: long_coord},
+          zoom: 12
+         
+        });
+          trafficLayer = new google.maps.TrafficLayer();
+          if(showTraffic){
+         trafficLayer.setMap(map);
+          }
+      }
+        
+//        
+//BASE MAPS STYLED MAPS SATELLITE DIRECTIONS MARKERS
+//function initMap() {
+//  var chicago = {lat: 41.85, lng: -87.65};
+//  var indianapolis = {lat: 39.79, lng: -86.14};
+//
+//  var map = new google.maps.Map(document.getElementById('map'), {
+//    center: chicago,
+//    scrollwheel: false,
+//    zoom: 7
+//  });
+//
+//  var directionsDisplay = new google.maps.DirectionsRenderer({
+//    map: map
+//  });
+//
+//  // Set destination, origin and travel mode.
+//  var request = {
+//    destination: indianapolis,
+//    origin: chicago,
+//    travelMode: google.maps.TravelMode.DRIVING
+//  };
+//
+//  // Pass the directions request to the directions service.
+//  var directionsService = new google.maps.DirectionsService();
+//  directionsService.route(request, function(response, status) {
+//    if (status == google.maps.DirectionsStatus.OK) {
+//      // Display the route on the map.
+//      directionsDisplay.setDirections(response);
+//    }
+//  });
+//}
+
+    </script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNSYDKc0j6v9C5vqog8jE79WEIjq7VwOo&callback=initMap">
+    </script>
+  
+     
+ </body>
+</html>

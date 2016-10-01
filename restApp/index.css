@@ -1,0 +1,92 @@
+body {
+    font-family:Arial,Verdana,Tahoma, Geneva, sans-serif;
+    text-align: center;
+    background-size: 100%;
+    font-size: 23px;
+    color:white;
+    
+    /*background-color: firebrick;*/
+    background-image: url('restaurant_ambiance.jpg');
+  
+}
+
+.centralText{
+    text-shadow: 2px 2px #000000;
+}
+table{
+    width:80%;
+    align-content: center;
+    border: 'FFFFFF';
+     
+}
+#searchResults{
+    margin-left: 350px;
+    text-align: left;
+}
+
+#title{
+    font-size: 70px;
+}
+
+#mssg{
+    align-content: center;
+    margin-left: 400px;
+    width: 450px;
+     font-size: 20px;
+    text-align: center;
+}
+button {
+  padding:5px;
+  border: 3px solid #FFFFFF;
+  color:#FFFFFF;
+  text-decoration:none;
+  background-color: Transparent;
+  height: 30px;
+  width: 100px;
+  margin-left: 10px;
+  font-size: 15px;
+  
+}
+#startbutton {
+  padding:5px;
+  border: 3px solid #FFFFFF;
+  color:#FFFFFF;
+  text-decoration:none;
+  background-color: Transparent;
+  height: 50px;
+  width: 175px;
+  margin-left: 10px;
+  font-size: 25px;
+  
+}
+
+
+input[type=text] {
+ align-content: left;
+ padding: 10px;
+    width: 20%;
+    height:30px;
+  border: solid 2px #dcdcdc;
+  transition: box-shadow 0.3s, border 0.3s;
+}
+
+select{
+ align-content: left;
+ padding: 10px;
+    width: 20%;
+    height:30px;
+  border: solid 2px #dcdcdc;
+  transition: box-shadow 0.3s, border 0.3s;
+    font-size: 15px;
+    text-align: center;
+}
+
+
+input[type="text"]:focus,
+input[type="text"].focus {
+  border: solid 1px #66b2ff;
+  box-shadow: 0 0 5px 1px #66b2ff;
+}
+
+
+
